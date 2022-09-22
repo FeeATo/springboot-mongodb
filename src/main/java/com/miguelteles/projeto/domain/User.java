@@ -3,10 +3,16 @@ package com.miguelteles.projeto.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 //a interface Serializable é capaz de transformar objetos em Bytes, para ser trafegado em rede, salvo em arquivos, etc.
+			// ↓ se não colocar isso, o spring vai automaticamente mapear com uma entidade com o mesmo nome que a classe só que lowercase
+@Document(collection="user") //-> fala pro Spring que esta classe corresponde a uma coleção do MongoDB. 
 public class User implements Serializable{	
 	private static final long serialVersionUID = 1L;
 	
+	@Id //fala pro spring que esse é o ID da coleção
 	private String id;
 	private String name;
 	private String email;
