@@ -1,5 +1,6 @@
 package com.miguelteles.projeto.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.miguelteles.projeto.DTO.UserDTO;
 import com.miguelteles.projeto.domain.User;
@@ -42,5 +45,19 @@ public class UserResource {
 		User obj = service.findById(id);												
 		return ResponseEntity.ok().body(new UserDTO(obj));		
 	}
+	
+	//ou PostMapping
+	@RequestMapping(method=RequestMethod.POST) 
+	public ResponseEntity<Void> insert(@RequestBody UserDTO objDto){		
+		User obj = service.fromDTO(objDto);
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		
+		//created retorna o código 201, que é o código http de quando se cria um novo recurso (quando foi salvo no DB)
+		return ResponseEntity.created(uri).build();	//retorna uma resposta vazia e um cabeçalho com o novo recurso criado	
+	}
+		
+	
+	
 	
 }

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.miguelteles.projeto.DTO.UserDTO;
 import com.miguelteles.projeto.domain.User;
 import com.miguelteles.projeto.repository.UserRepository;
 import com.miguelteles.projeto.services.exception.ObjectNotFoundException;
@@ -25,6 +26,14 @@ public class UserService {
 		//Optional is a variable that may or may not have a non-null value
 		Optional<User> user = repo.findById(id); //esta função vem do spring
 		return user.orElseThrow(()->new ObjectNotFoundException("Objeto não encontrado"));
+	}
+	
+	public User insert(User obj) {
+		return repo.insert(obj);
+	}
+	
+	public User fromDTO(UserDTO objDto) {
+		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
 	}
 	
 }
