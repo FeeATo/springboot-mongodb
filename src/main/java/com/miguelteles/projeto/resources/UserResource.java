@@ -56,6 +56,12 @@ public class UserResource {
 		//created retorna o código 201, que é o código http de quando se cria um novo recurso (quando foi salvo no DB)
 		return ResponseEntity.created(uri).build();	//retorna uma resposta vazia e um cabeçalho com o novo recurso criado	
 	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable String id){			
+		service.delete(id);												
+		return ResponseEntity.noContent().build(); //quando faz uma operação que não precisa retornar nada, o código é o 204 (.noContent())		
+	}
 		
 	
 	
