@@ -1,9 +1,12 @@
 package com.miguelteles.projeto.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 //a interface Serializable é capaz de transformar objetos em Bytes, para ser trafegado em rede, salvo em arquivos, etc.
@@ -17,7 +20,9 @@ public class User implements Serializable{
 	private String name;
 	private String email;
 	
-	//ainda não tem associações
+	//uma coleção:
+	@DBRef(lazy=true) //fala pro Spring que é uma referência à outra entidade. "lazy=true" fala que os posts só serão carregados se forem explicitamente acessados. Isso para não carregar todos os posts ao acessar todos os usuários  
+	private List<Post> posts = new ArrayList<>();	
 	
 	public User() {}
 
@@ -52,6 +57,14 @@ public class User implements Serializable{
 		this.email = email;
 	}
 
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -67,5 +80,5 @@ public class User implements Serializable{
 			return false;
 		User other = (User) obj;
 		return Objects.equals(id, other.id);
-	}
+	}	
 }
