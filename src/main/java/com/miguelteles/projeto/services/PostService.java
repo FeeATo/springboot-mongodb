@@ -28,4 +28,8 @@ public class PostService {
 	public Post insert(Post obj) {		
 		return repo.insert(obj);
 	}
+
+	public void delete(String id) {
+		repo.deleteById(id);		
+	}
 }
