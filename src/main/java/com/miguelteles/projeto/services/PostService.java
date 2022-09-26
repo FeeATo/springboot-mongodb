@@ -27,8 +27,9 @@ public class PostService {
 	}
 	
 	public List<Post> findByTitle(String text){
-		return repo.findByTitleContainingIgnoreCase(text);
-	}
+		//return repo.findByTitleContainingIgnoreCase(text);
+		return repo.searchTitle(text);
+	}	
 
 	public List<CommentDTO> getComments(String id){
 		return findById(id).getComments();

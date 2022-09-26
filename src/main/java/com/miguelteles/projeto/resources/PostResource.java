@@ -41,7 +41,7 @@ public class PostResource {
 		List<Post> list = service.findByTitle(text);		
 		return ResponseEntity.ok().body(list);		
 	}
-	
+		
 	//GET - retorna todos os posts
 	@GetMapping
 	public ResponseEntity<List<Post>> findAll(){
