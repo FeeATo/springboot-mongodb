@@ -50,4 +50,10 @@ public class PostService {
 	public List<CommentDTO> getComments(String id){
 		return findById(id).getComments();
 	}
+	
+	public Post insertComment(CommentDTO comment, String idPost) {
+		Post post = findById(idPost);
+		post.getComments().add(comment);		
+		return repo.save(post);
+	}
 }
