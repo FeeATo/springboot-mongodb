@@ -24,4 +24,8 @@ public class PostService {
 	public List<Post> findAll(){
 		return repo.findAll();
 	}
+
+	public Post insert(Post obj) {		
+		return repo.insert(obj);
+	}
 }
