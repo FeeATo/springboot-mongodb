@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.miguelteles.projeto.DTO.UserDTO;
+import com.miguelteles.projeto.domain.Post;
 import com.miguelteles.projeto.domain.User;
 import com.miguelteles.projeto.services.UserService;
 
@@ -63,7 +64,7 @@ public class UserResource {
 		return ResponseEntity.noContent().build(); //quando faz uma operação que não precisa retornar nada, o código é o 204 (.noContent())		
 	}
 	
-	//ou PostMapping
+	//ou PutMapping
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT) 
 	public ResponseEntity<Void> update(@RequestBody UserDTO objDto, @PathVariable String id){		
 		User obj = service.fromDTO(objDto);
@@ -71,6 +72,12 @@ public class UserResource {
 		obj = service.update(obj);
 		
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value="/{id}/posts", method=RequestMethod.GET)
+	public ResponseEntity<List<Post>> findPosts(@PathVariable String id){			
+		User obj = service.findById(id);												
+		return ResponseEntity.ok().body(obj.getPosts());		
 	}
 	
 		
