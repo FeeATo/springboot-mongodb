@@ -32,4 +32,16 @@ public class PostService {
 	public void delete(String id) {
 		repo.deleteById(id);		
 	}
+
+	public Post update(Post obj) {
+		Post newObj = findById(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
+	}
+	
+	private void updateData(Post newObj, Post obj) {
+		//copia os dados de obj para o newObj
+		newObj.setBody(obj.getBody());
+		newObj.setTitle(obj.getTitle());		
+	}
 }
