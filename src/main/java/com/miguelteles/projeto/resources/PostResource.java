@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.miguelteles.projeto.DTO.CommentDTO;
 import com.miguelteles.projeto.domain.Post;
 import com.miguelteles.projeto.services.PostService;
 
@@ -32,6 +33,12 @@ public class PostResource {
 	@GetMapping
 	public ResponseEntity<List<Post>> findAll(){
 		List<Post> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value="/{id}/comments")
+	public ResponseEntity<List<CommentDTO>> getComments(@PathVariable String id){
+		List<CommentDTO> list = service.getComments(id);
 		return ResponseEntity.ok().body(list);
 	}
 		

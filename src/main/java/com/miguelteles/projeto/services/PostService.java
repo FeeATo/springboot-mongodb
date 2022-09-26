@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.miguelteles.projeto.DTO.CommentDTO;
 import com.miguelteles.projeto.domain.Post;
 import com.miguelteles.projeto.repository.PostRepository;
 import com.miguelteles.projeto.services.exception.ObjectNotFoundException;
@@ -44,5 +45,9 @@ public class PostService {
 		//copia os dados de obj para o newObj
 		newObj.setBody(obj.getBody());
 		newObj.setTitle(obj.getTitle());		
+	}
+	
+	public List<CommentDTO> getComments(String id){
+		return findById(id).getComments();
 	}
 }
