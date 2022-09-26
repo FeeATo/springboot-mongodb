@@ -25,7 +25,15 @@ public class PostService {
 	public List<Post> findAll(){
 		return repo.findAll();
 	}
+	
+	public List<Post> findByTitle(String text){
+		return repo.findByTitleContainingIgnoreCase(text);
+	}
 
+	public List<CommentDTO> getComments(String id){
+		return findById(id).getComments();
+	}
+	
 	public Post insert(Post obj) {		
 		return repo.insert(obj);
 	}
@@ -47,13 +55,13 @@ public class PostService {
 		newObj.setTitle(obj.getTitle());		
 	}
 	
-	public List<CommentDTO> getComments(String id){
-		return findById(id).getComments();
-	}
+	
 	
 	public Post insertComment(CommentDTO comment, String idPost) {
 		Post post = findById(idPost);
 		post.getComments().add(comment);		
 		return repo.save(post);
 	}
+	
+	
 }

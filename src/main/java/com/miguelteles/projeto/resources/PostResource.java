@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.miguelteles.projeto.DTO.CommentDTO;
 import com.miguelteles.projeto.domain.Post;
+import com.miguelteles.projeto.resources.util.URL;
 import com.miguelteles.projeto.services.PostService;
 
 @RestController 
@@ -30,6 +32,15 @@ public class PostResource {
 		Post obj = service.findById(id);												
 		return ResponseEntity.ok().body(obj);		
 	}	
+	
+	//GET - retorna uma lista de posts que contêm uma substring, passada como parâmetro, no título
+	@GetMapping(value="/titlesearch")//-> posts/titlesearch?text=<TEXTO_PASSADO>
+											// ↓ O RequestParam é o que vai reconhecer o parâmetro, ou seja, reconhecer que depois do '?' vem um parâmetro com seu nome ('value="text"') e seu valor
+	public ResponseEntity<List<Post>> findByTitle(@RequestParam(value="text", defaultValue="") String text){			
+		text = URL.decoreParam(text);
+		List<Post> list = service.findByTitle(text);		
+		return ResponseEntity.ok().body(list);		
+	}
 	
 	//GET - retorna todos os posts
 	@GetMapping
