@@ -38,6 +38,7 @@ public class PostService {
 		updateData(newObj, obj);
 		return repo.save(newObj);
 	}
+		
 	
 	private void updateData(Post newObj, Post obj) {
 		//copia os dados de obj para o newObj

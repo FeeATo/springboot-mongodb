@@ -51,10 +51,9 @@ public class PostResource {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Post> update(@PathVariable String id, @RequestBody Post obj){
-		
 		obj.setId(id);
 		obj = service.update(obj);
 		
 		return ResponseEntity.noContent().build();
-	}
+	}		
 }
