@@ -1,6 +1,6 @@
 # API RESTful com Spring Boot e MongoDB
 Esta é uma aplicação em que podem ser postados **Posts**, estes posts têm **Autores** (autores são **usuários**) e também contêm **Comentários** feitos por **Usuários**.
-Foi elaborada uma API Restful com Java utilizando o framework Spring Boot, acessando e alterando dados em um banco de dados NoSQL MongoDB.
+Foi elaborada uma API RESTful com Java utilizando o framework Spring Boot, acessando e alterando dados em um banco de dados NoSQL MongoDB.
 
 ## Funcionalidades da API
 Nota: é importante salientar que a porta utilizada para acessar os dados varia de acordo com as configurações do servidor criado na sua máquina. Nos exemplos, utilizarei a porta 8080.
